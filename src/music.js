@@ -35,6 +35,8 @@ export const SCORE = Object.freeze({
   ],
 });
 export const DURATION = (32 * 60) / SCORE.bpm;
+// Matched to the collection at default volume; full-volume peak stays below 0.37.
+export const MASTER_GAIN = 1.4;
 const hz = (n) => 440 * 2 ** ((n - 69) / 12);
 /** Circular accumulation makes reverb-like chord tails wrap the exact loop seam. No samples or SFX. */
 export function renderTrack(rate = 22050) {
@@ -116,7 +118,7 @@ export class Music {
         this.context = c;
         this.contextCount++;
         this.master = c.createGain();
-        this.master.gain.value = this.enabled ? this.volume * 0.65 : 0;
+        this.master.gain.value = this.enabled ? this.volume * MASTER_GAIN : 0;
         this.analyser = c.createAnalyser();
         this.analyser.fftSize = 2048;
         this.master.connect(this.analyser);
@@ -156,7 +158,7 @@ export class Music {
       const now = this.context.currentTime;
       this.master.gain.cancelScheduledValues(now);
       this.master.gain.setTargetAtTime(
-        this.enabled ? this.volume * 0.65 : 0,
+        this.enabled ? this.volume * MASTER_GAIN : 0,
         now,
         0.025,
       );

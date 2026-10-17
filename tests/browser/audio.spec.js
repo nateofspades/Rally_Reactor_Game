@@ -4,7 +4,8 @@ test("real Web Audio loop renders audible RMS and clean headroom", async ({
 }, info) => {
   await page.goto("./");
   const m = await page.evaluate(async () => {
-    const { renderTrack, DURATION } = await import("./src/music.js");
+    const { renderTrack, DURATION, MASTER_GAIN } =
+      await import("./src/music.js");
     const rate = 22050,
       pcm = renderTrack(rate),
       C = window.OfflineAudioContext || window.webkitOfflineAudioContext,
@@ -15,7 +16,7 @@ test("real Web Audio loop renders audible RMS and clean headroom", async ({
       g = c.createGain();
     s.buffer = b;
     s.loop = true;
-    g.gain.value = 0.65 * 0.65;
+    g.gain.value = 0.65 * MASTER_GAIN;
     s.connect(g).connect(c.destination);
     s.start();
     const rendered = await c.startRendering(),
@@ -37,7 +38,8 @@ test("real Web Audio loop renders audible RMS and clean headroom", async ({
     body: JSON.stringify(m),
     contentType: "application/json",
   });
-  expect(m.rms).toBeGreaterThan(0.015);
+  expect(m.rms).toBeGreaterThanOrEqual(0.04);
+  expect(m.rms).toBeLessThanOrEqual(0.06);
   expect(m.peak).toBeLessThan(0.85);
   expect(m.seamDelta).toBeLessThan(0.05);
 });
