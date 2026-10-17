@@ -1,0 +1,90 @@
+{
+  "scope": "Real headless browser measurements, default gain/volume",
+  "startedAt": "2026-10-17T03:25:39.193Z",
+  "measurements": [
+    {
+      "browser": "chromium",
+      "name": "offline-audio-metrics",
+      "data": {
+        "rms": 0.02163030135649153,
+        "peak": 0.10849615186452866,
+        "duration": 17.142857142857142,
+        "seamDelta": 0.000136468093842268
+      }
+    },
+    {
+      "browser": "chromium",
+      "name": "live-audio-metrics",
+      "data": {
+        "audible": {
+          "rms": 0.023200291005754943,
+          "peak": 0.10105197131633759
+        },
+        "muted": {
+          "rms": 0,
+          "peak": 0
+        },
+        "unmuted": {
+          "rms": 0.022152036849277846,
+          "peak": 0.09527579694986343
+        }
+      }
+    },
+    {
+      "browser": "firefox",
+      "name": "offline-audio-metrics",
+      "data": {
+        "rms": 0.02163030135649153,
+        "peak": 0.10849615186452866,
+        "duration": 17.142857142857142,
+        "seamDelta": 0.000136468093842268
+      }
+    },
+    {
+      "browser": "firefox",
+      "name": "live-audio-metrics",
+      "data": {
+        "audible": {
+          "rms": 0.02090933105345632,
+          "peak": 0.0956965982913971
+        },
+        "muted": {
+          "rms": 1.4802347470854314e-9,
+          "peak": 9.815904533638786e-9
+        },
+        "unmuted": {
+          "rms": 0.023904956736355933,
+          "peak": 0.1086801216006279
+        }
+      }
+    },
+    {
+      "browser": "webkit",
+      "name": "offline-audio-metrics",
+      "data": {
+        "rms": 0.02163030135649153,
+        "peak": 0.10849615186452866,
+        "duration": 17.142857142857142,
+        "seamDelta": 0.000136468093842268
+      }
+    },
+    {
+      "browser": "webkit",
+      "name": "live-audio-metrics",
+      "data": {
+        "audible": {
+          "rms": 0.03139985875330745,
+          "peak": 0.0917152389883995
+        },
+        "muted": {
+          "rms": 0,
+          "peak": 0
+        },
+        "unmuted": {
+          "rms": 0.018052276741537365,
+          "peak": 0.07475025951862335
+        }
+      }
+    }
+  ]
+}
