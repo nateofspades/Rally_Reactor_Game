@@ -140,7 +140,11 @@ test("resize orientation and visibility pause keep transport identity", async ({
   const b = await page.evaluate(() => window.vectorDuel.audio());
   expect(b.contextCount).toBe(1);
   expect(b.startTimestamp).toBe(a.startTimestamp);
-  expect(b.phase).not.toBe(a.phase);
+  await expect
+    .poll(() => page.evaluate(() => window.vectorDuel.audio().phase), {
+      timeout: 10000,
+    })
+    .not.toBe(a.phase);
   await page.evaluate(() => {
     Object.defineProperty(document, "hidden", {
       configurable: true,

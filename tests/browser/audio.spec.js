@@ -74,9 +74,12 @@ test("one audio transport survives every UI transition and persists preferences"
   const original = await page.evaluate(() => window.vectorDuel.audio());
   await page.getByRole("button", { name: "Pause", exact: true }).click();
   await expect(page.locator("#status")).toHaveText("Paused");
-  await page.waitForTimeout(100);
-  let paused = await page.evaluate(() => window.vectorDuel.audio());
-  expect(paused.phase).not.toBe(original.phase);
+  // Running state can precede the first native audio callback on fast CI.
+  await expect
+    .poll(() => page.evaluate(() => window.vectorDuel.audio().phase), {
+      timeout: 10000,
+    })
+    .not.toBe(original.phase);
   await page.getByRole("button", { name: "Resume", exact: true }).click();
   await page.getByRole("button", { name: "Restart", exact: true }).click();
   await page.setViewportSize({ width: 390, height: 844 });
@@ -130,17 +133,32 @@ test("live analyser responds to mute unmute and volume without new layers", asyn
       }
       return { rms: Math.sqrt(sum / n), peak };
     });
-  let audible = await measure();
-  expect(audible.rms).toBeGreaterThan(0.004);
+  let audible;
+  await expect
+    .poll(
+      async () => {
+        audible = await measure();
+        return audible.rms;
+      },
+      { timeout: 10000 },
+    )
+    .toBeGreaterThan(0.004);
   expect(audible.peak).toBeLessThan(0.85);
   await page.getByRole("button", { name: "Music On", exact: true }).click();
   await page.waitForTimeout(300);
   let muted = await measure();
   expect(muted.rms).toBeLessThan(0.001);
   await page.getByRole("button", { name: "Music Off", exact: true }).click();
-  await page.waitForTimeout(100);
-  let unmuted = await measure();
-  expect(unmuted.rms).toBeGreaterThan(0.004);
+  let unmuted;
+  await expect
+    .poll(
+      async () => {
+        unmuted = await measure();
+        return unmuted.rms;
+      },
+      { timeout: 10000 },
+    )
+    .toBeGreaterThan(0.004);
   await info.attach("live-audio-metrics", {
     body: JSON.stringify({ audible, muted, unmuted }),
     contentType: "application/json",

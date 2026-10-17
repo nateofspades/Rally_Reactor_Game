@@ -50,16 +50,16 @@ test("Chromium native mobile touch drag uses capture across court bounds", async
     type: "touchMove",
     touchPoints: [{ x, y: r.y + r.height * 0.8 }],
   });
-  expect(
-    await p.evaluate(() => window.vectorDuel.state().paddles[0]),
-  ).toBeCloseTo(432, 0);
+  await expect
+    .poll(() => p.evaluate(() => window.vectorDuel.state().paddles[0]))
+    .toBeCloseTo(432, 0);
   await cdp.send("Input.dispatchTouchEvent", {
     type: "touchMove",
     touchPoints: [{ x, y: r.y + r.height + 30 }],
   });
-  expect(await p.evaluate(() => window.vectorDuel.state().paddles[0])).toBe(
-    486,
-  );
+  await expect
+    .poll(() => p.evaluate(() => window.vectorDuel.state().paddles[0]))
+    .toBe(486);
   await cdp.send("Input.dispatchTouchEvent", {
     type: "touchEnd",
     touchPoints: [],
