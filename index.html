@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#07151d" />
+    <meta
+      name="description"
+      content="Vector Duel: a futuristic Pong duel with original electronic music. Outplay the AI or challenge a friend. First to ten."
+    />
+    <title>Pong · Vector Duel</title>
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="brand">
+          <span class="brand-icon" aria-hidden="true">Ⅱ</span>
+          <div>
+            <p class="eyebrow">ORBITAL ARCADE / 001</p>
+            <h1>VECTOR DUEL</h1>
+          </div>
+        </div>
+        <span class="chip">PONG REIMAGINED <i></i></span>
+      </header>
+      <section class="dashboard" aria-label="Match scoreboard">
+        <div class="player">
+          <span class="eyebrow">01 / <span id="leftLabel">YOU</span></span
+          ><strong id="scoreLeft">00</strong
+          ><span class="player-bar cyan"></span>
+        </div>
+        <div class="match-info">
+          <span class="eyebrow">FIRST TO 10</span
+          ><span id="status" role="status">Awaiting challengers</span>
+          <div class="stats">
+            <span>RALLY <b id="rally">0</b></span
+            ><span>BEST <b id="best">0</b></span
+            ><span>RECORD <b id="record">0</b></span>
+          </div>
+        </div>
+        <div class="player right">
+          <span class="eyebrow">02 / <span id="rightLabel">COMPUTER</span></span
+          ><strong id="scoreRight">00</strong
+          ><span class="player-bar coral"></span>
+        </div>
+      </section>
+      <section class="arena-shell" aria-label="Pong court">
+        <div class="arena">
+          <canvas
+            id="court"
+            width="960"
+            height="540"
+            tabindex="0"
+            aria-label="Pong court. W S or arrow keys to move. P to pause."
+          ></canvas>
+          <div class="overlay" id="overlay">
+            <p class="eyebrow" id="overlayTag">HUMAN VS MACHINE</p>
+            <h2 id="overlayTitle">Find your angle.</h2>
+            <p id="overlayCopy">Two paddles. One signal. Own the rally.</p>
+            <button class="primary" id="start">
+              Start match <span aria-hidden="true">↗</span>
+            </button>
+          </div>
+          <div id="count" aria-hidden="true"></div>
+        </div>
+        <div
+          class="rail"
+          id="drag"
+          role="slider"
+          tabindex="0"
+          aria-label="Left paddle drag rail"
+          aria-valuemin="54"
+          aria-valuemax="486"
+          aria-valuenow="270"
+        >
+          <span>SLIDE: LEFT = UP · RIGHT = DOWN</span><i></i>
+        </div>
+      </section>
+      <section class="console" aria-label="Match controls">
+        <div class="setup">
+          <label
+            >MODE<select id="mode">
+              <option value="solo">Solo vs AI</option>
+              <option value="duo">Two players · keyboard</option>
+            </select></label
+          ><label
+            >AI LEVEL<select id="difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium" selected>Medium</option>
+              <option value="hard">Hard</option>
+            </select></label
+          >
+        </div>
+        <div class="actions">
+          <button id="pause" disabled>Pause</button
+          ><button id="restart">Restart</button>
+        </div>
+      </section>
+      <footer>
+        <div class="instructions">
+          <span class="eyebrow">HOW TO DUEL</span>
+          <p id="instructions">
+            <kbd>W</kbd> <kbd>S</kbd> or <kbd>↑</kbd> <kbd>↓</kbd> move ·
+            <kbd>P</kbd> pause<br />Touch: slide the rail left = up, right =
+            down. Or drag in the court.
+          </p>
+        </div>
+        <div class="music">
+          <button id="music" aria-pressed="true">Music On</button
+          ><label class="volume"
+            >Volume<input
+              id="volume"
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0.65" /></label
+          ><span>♫ ORBITAL RELAY <small>ORIGINAL SCORE / 112 BPM</small></span>
+        </div>
+      </footer>
+      <div class="bottom">
+        <span>PRECISION OVER POWER.</span><span>NO SFX. JUST THE SIGNAL.</span>
+      </div>
+    </main>
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>
