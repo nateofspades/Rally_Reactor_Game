@@ -1,0 +1,1 @@
+{"name":"vector-duel-pong","version":"1.0.0","private":true,"type":"module","scripts":{"test":"vitest run --maxWorkers=1","serve":"node server.js","test:browser":"playwright test --workers=1"},"devDependencies":{"@playwright/test":"^1.56.0","vitest":"^4.1.12"}}
