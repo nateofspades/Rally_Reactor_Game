@@ -1,5 +1,7 @@
-# Pong
-[Play live — Vector Duel](https://nateofspades.github.io/pong_game/)
+# Vector Duel — private preparation
+**Not published or cleared for release.** Existing geometric art, mechanics, Orbital Relay soundtrack and `vector-duel.record` / `vector-duel.music` storage remain intact. Proposed branding/URL is only in `docs/private-migration.md`. Historical screenshots and test totals below predate this preparation; current evidence is `/root/arcade-migration-audit/preparation/paddle-*`.
+
+Local review: `npm ci`, `npm run serve`, open `http://127.0.0.1:4187`. Tests: `npm test`; stop the manual server, then `BASE_URL=http://127.0.0.1:4187 npm run test:browser` (Chromium, Firefox and WebKit, one worker). Linux audio tests require `pulseaudio`; the runner creates an isolated null sink, not physical-speaker verification. Browser install: `npx playwright install --with-deps chromium firefox webkit`. No build command exists. All servers/tests in this shared audit must use `flock /root/arcade-migration-audit/preparation/test.lock`. Candidate static runtime is only `index.html`, `style.css`, `src/`, `assets/icon.svg` and `LICENSE`; exclude tests/evidence/private docs.
 
 ![Active gameplay](assets/screenshots/gameplay.png)
 

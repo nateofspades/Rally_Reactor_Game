@@ -6,7 +6,7 @@ export default defineConfig({
   retries: 0,
   reporter: [["list"], ["json", { outputFile: "test-results/results.json" }]],
   use: {
-    baseURL: process.env.LIVE_URL || "http://127.0.0.1:4187",
+    baseURL: process.env.BASE_URL || process.env.LIVE_URL || "http://127.0.0.1:4187",
     trace: "retain-on-failure",
   },
   projects: [
