@@ -615,6 +615,12 @@ input[type="range"] {
     margin-inline: auto;
   }
 }
+@media (min-width: 1000px) and (min-height: 601px) and (max-height: 850px) {
+  /* The existing short-desktop header/HUD is smaller, leaving more court area. */
+  .arena-shell {
+    max-width: min(680px, calc((100dvh - 450px) * 16 / 9));
+  }
+}
 @media (max-width: 600px) and (max-height: 600px) {
   main { padding: 8px 14px; }
   header { margin-bottom: 8px; }
