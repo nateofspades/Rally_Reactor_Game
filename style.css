@@ -608,7 +608,7 @@ input[type="range"] {
 }
 
 /* Bound the court by available height as well as width. No overflow masking. */
-@media (min-width: 601px) and (min-height: 481px) {
+@media (min-width: 1000px) and (min-height: 601px) {
   .arena-shell {
     width: 100%;
     max-width: min(100%, calc((100dvh - 510px) * 16 / 9));
