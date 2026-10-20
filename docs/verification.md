@@ -1,6 +1,21 @@
 # Verification
 
-## Final local execution
+## Rally Reactor final-release execution — 2026-10-20
+
+Owner-authorized final release supersedes private holds. Fresh execution evidence is `/root/arcade-final-migration/rallyreactorgame/`, separate from the historical evidence below.
+
+- Full single-worker Vitest: 16 passed across 6 files, 0 failed, 0 skipped.
+- Full single-worker Playwright: 87 enumerated cases, **80 passed, 7 skipped, 0 failed, 0 flaky**. Chromium 29 passed / 0 skipped; Firefox 23 passed / 6 skipped; WebKit 28 passed / 1 skipped. Raw JSON and exact audio values are in `browser-final.json` and `browser-summary.json` in release evidence.
+- All six exact viewport geometries passed in each engine: 1920×1080, 1366×768, 768×1024, 390×844, 320×568, 844×390. Initial fit plus active native-context play passed at all six in Chromium/WebKit; Firefox passed both desktop startup cases and all six desktop-context geometries. Firefox's four mobile-context cases, existing mobile-context case and Chromium-only CDP case are explicitly skipped; WebKit skips only CDP.
+- Real clock/transport continuity, actual node counts, offline signal/headroom/seam and live analyser mute/unmute passed in every engine using the isolated Linux null sink. Offline RMS 0.046588341155208886, peak 0.2336840182542801, seam delta 0.00029393122531473637. Live muted RMS: Chromium 0, Firefox 3.6814603359329635e-9, WebKit 0. These are digital measurements, not subjective or physical output acceptance.
+- Fresh exact-title regression was observed RED on the old browser title before the targeted identity edit. Seeded origin-wide records/preferences survived the retired-path to final-path test in all three engines; only the retired document is fulfilled locally, not the storage implementation. No real-user migration is claimed.
+- An initial browser run exposed an overly short 5-second playing-state readiness deadline at 1920×1080 on this software-rendering VPS. It was stopped, its trace/log retained, and the test-only deadline extended to 30 seconds. The full clean rerun above passed; game countdown/physics were not weakened or mocked.
+- Active desktop/portrait/landscape screenshots were freshly captured after real Start and playing-state readiness, then actually viewed. The README image is not a countdown or mockup.
+- Full and production-only npm registry audits reported zero vulnerabilities. No production npm dependencies, audio notes, physics, input behavior or storage keys changed in the release rebrand.
+
+The release evidence report records the actual supported Codex review result/reviewed head, immutable-ID rename readback, final remote author association, exact-SHA CI/Pages runs and deployed checks. Remote success is never inferred from local tests. Browser emulation is not physical-device, speaker/headphone loudness, mobile interruption or sustained-FPS acceptance. IP assessment is technical due diligence, not legal clearance.
+
+## Historical pre-migration execution (not fresh final counts)
 
 Run began 2026-10-17T03:25:39.193Z. Node 22.23.3, npm 12.2.0, Vitest 4.1.12, Playwright 1.64.1 on Linux. All workers limited to one. No mocked browser output was substituted for execution.
 

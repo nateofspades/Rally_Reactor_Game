@@ -2,6 +2,8 @@
 
 ## Orbital Relay
 
+Preserved unchanged for Rally Reactor. The earlier Vector Duel / Pong names below describe the repository's historical authorship record, not current product branding or a new rights clearance.
+
 Original instrumental composition and synthesis authored for Vector Duel / Pong, copyright 2026 Nathan Burns, MIT (same as code). No imported recordings, samples, collision sounds, button sounds, or other SFX. The complete score and synthesis are in `src/music.js`.
 
 F minor, 112 BPM, eight 4/4 bars (32 beats), looping at 17.142857 seconds. Swung eighths use a 58% offbeat. The clipped motif begins F4–rest–C5–Ab4–rest–Bb4–Eb5–C5, answered F4–rest–Ab4–C5–Bb4–rest–Ab4–Eb4. Bar 6 adds an octave variation. A pulse-shaped harmonic bass, low metrical sine pulses, high pitched short bell figures, and slow airy chord envelopes form the rhythmic bed. Harmony evolves through Fm(add9)/Fm7, Dbmaj7, Ab(add9), and Eb6 colors. The D major / 142 BPM puzzle assignment and A minor / 156 BPM Breakout assignment are explicitly not used.

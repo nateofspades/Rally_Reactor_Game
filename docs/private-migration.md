@@ -1,4 +1,6 @@
-# Private migration proposal — NOT publication authorization
+# Historical private migration proposal — superseded
+
+The owner's final release authorization supersedes the hold and candidate values below. Final title: Rally Reactor. Final repository: `nateofspades/Rally_Reactor_Game`; final URL: `https://nateofspades.github.io/Rally_Reactor_Game/`. The following is preserved planning history, not current instructions or legal clearance.
 
 Current neutral review title: **Vector Duel**. Proposed later title: **Paddle Pulse**.
 Proposed repository: `nateofspades/Paddle_Pulse_Game`.

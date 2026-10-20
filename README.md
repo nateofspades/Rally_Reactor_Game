@@ -1,14 +1,14 @@
-# Vector Duel — private preparation
+# Rally Reactor
 
-[Older live deployment](https://nateofspades.github.io/pong_game/) — the legacy site, not this private branch or an approved new URL.
+[Play live](https://nateofspades.github.io/Rally_Reactor_Game/)
 
-![Actual private-worktree gameplay](assets/screenshots/gameplay.png)
+![Active gameplay](assets/screenshots/gameplay.png)
 
-**Not published or cleared for release.** Existing geometric art, mechanics, Orbital Relay soundtrack and `vector-duel.record` / `vector-duel.music` storage remain intact. Proposed branding/URL is only in `docs/private-migration.md`. Gameplay screenshots were refreshed from actual private-worktree runs after the layout fix; historical test totals below are not new preparation passes. Current evidence is `/root/arcade-migration-audit/preparation/paddle-*`.
+An electronic paddle duel with mint/coral geometric visuals and the Orbital Relay instrumental score. Records and music preferences retain the `vector-duel.record` / `vector-duel.music` keys for same-origin path compatibility. See [IP assessment](docs/IP_AUDIT.md) for provenance and limitations; publication is not legal clearance.
 
-Private verification completed locally: **15 Vitest tests across 5 files passed; the full Chromium/Firefox/WebKit suite enumerated 66 cases: 63 passed, 3 existing capability-based skips, 0 failed/flaky**. All six preparation viewport regressions passed in each engine, including laptop and 320×568 control reachability. The skips cover Chromium-only CDP touch injection in Firefox/WebKit and unsupported Firefox mobile emulation, not hidden failures. Automated/digital results are not physical-device or speaker acceptance.
+Final release verification is recorded in [verification evidence](docs/verification.md). Capability-based skips are reported separately from passes. Browser emulation is not physical-device or speaker acceptance.
 
-Local review: `npm ci`, `npm run serve`, open `http://127.0.0.1:4187`. Tests: `npm test`; stop the manual server, then `BASE_URL=http://127.0.0.1:4187 npm run test:browser` (Chromium, Firefox and WebKit, one worker). Linux audio tests require `pulseaudio`; the runner creates an isolated null sink, not physical-speaker verification. Browser install: `npx playwright install --with-deps chromium firefox webkit`. No build command exists. All servers/tests in this shared audit must use `flock /root/arcade-migration-audit/preparation/test.lock`. Candidate static runtime is only `index.html`, `style.css`, `src/`, `assets/icon.svg` and `LICENSE`; exclude tests/evidence/private docs.
+Local review: `npm ci`, `npm run serve`, open `http://127.0.0.1:4187`. Stop the manual server before `npm run test:browser` (Chromium, Firefox and WebKit, one worker). Linux audio tests require `pulseaudio`; the runner creates an isolated null sink. Browser install: `npx playwright install --with-deps chromium firefox webkit`. No build command exists. Static runtime uses relative paths, `index.html`, `style.css`, `src/`, `assets/icon.svg` and `LICENSE`; no production npm dependencies or remote runtime downloads.
 
 A precision paddle duel in a quiet orbital arcade. Read the angle, catch the signal, and reach ten before your opponent. Original canvas visuals and an original retro-electronic score; no backend, accounts, advertising, paid services or SFX.
 
@@ -61,7 +61,7 @@ Vitest covers deterministic rules and audio abstraction. Playwright runs Chromiu
 
 ## Technology, verification and credits
 
-Static HTML/CSS, vanilla ES modules, Canvas 2D, Web Audio, localStorage, Vitest and Playwright. The existing legacy workflow targets main and pull requests; it was not run or changed for this private preparation. Do not publish this branch or its private documents. Product references remain relative; future deployment requires separate authorization and direct verification.
+Static HTML/CSS, vanilla ES modules, Canvas 2D, Web Audio, localStorage, Vitest and Playwright. CI tests main and pull requests with unit and three-engine browser suites. Pages serves main at the exact live URL above. Historical private planning is explicitly superseded by the owner's final release authorization. No accounts, backend, advertising or paid services.
 
 See [verification evidence](docs/verification.md) for actual counts and limitations. Automated mobile emulation is not physical-device touch or subjective audio testing. Target is smooth 60 FPS, not a hardware-independent performance guarantee.
 

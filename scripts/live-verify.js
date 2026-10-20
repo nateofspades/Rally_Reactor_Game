@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { writeFile, mkdir } from "node:fs/promises";
 import { chromium, expect } from "@playwright/test";
-const url = process.env.LIVE_URL || "https://nateofspades.github.io/pong_game/";
+const url = process.env.LIVE_URL || "https://nateofspades.github.io/Rally_Reactor_Game/";
 const destination =
   process.env.DELIVERY_DIR || "/root/arcade-projects/delivery";
 const results = [];
@@ -9,11 +9,14 @@ await mkdir(destination, { recursive: true });
 const browser = await chromium.launch();
 try {
   for (const [width, height] of [
+    [1920, 1080],
     [1366, 768],
+    [768, 1024],
     [390, 844],
+    [320, 568],
     [844, 390],
   ]) {
-    const mobile = width !== 1366;
+    const mobile = width < 1000;
     const context = await browser.newContext({
       viewport: { width, height },
       isMobile: mobile,
@@ -36,6 +39,7 @@ try {
     });
     const response = await page.goto(url);
     assert.equal(response.status(), 200);
+    assert.equal(await page.title(), "Rally Reactor");
     assert.equal(await page.evaluate(() => typeof window.__test), "undefined");
     await page
       .getByRole("button", { name: "Start match", exact: true })
@@ -58,7 +62,7 @@ try {
         Math.abs(
           (await page.evaluate(() => window.vectorDuel.state().paddles[0])) -
             135,
-        ) < 2,
+        ) <= 540 / r.height + 0.01,
       );
       const rail = await page.locator("#drag").boundingBox();
       await page.touchscreen.tap(rail.x + rail.width * 0.9, rail.y + 22);
@@ -66,7 +70,7 @@ try {
         Math.abs(
           (await page.evaluate(() => window.vectorDuel.state().paddles[0])) -
             442.8,
-        ) < 2,
+        ) <= 432 / rail.width + 0.01,
       );
     } else {
       await page.keyboard.down("w");
@@ -135,14 +139,14 @@ try {
     for (const b of geo.buttons) {
       assert.ok(b.height >= 44);
       assert.ok(b.right <= width);
-      if (width > 600) assert.ok(b.bottom <= height);
+      assert.ok(b.bottom <= height);
     }
     await page.waitForFunction(
       () => window.vectorDuel.state().state === "playing",
       null,
       { timeout: 30000 },
     );
-    const screenshot = `${destination}/pong_game-live-${width}x${height}.png`;
+    const screenshot = `${destination}/rally-reactor-live-${width}x${height}.png`;
     await page.screenshot({ path: screenshot, fullPage: true });
     assert.deepEqual(errors, []);
     assert.deepEqual(failures, []);
@@ -166,13 +170,19 @@ try {
     new URL("assets/screenshots/gameplay.png", url).href,
   );
   assert.equal(image.status(), 200);
+  const assets = [];
+  for (const path of ["index.html", "style.css", "src/app.js", "src/rules.js", "src/music.js", "src/storage.js", "assets/icon.svg", "LICENSE"]) {
+    const response = await page.request.get(new URL(path, url).href);
+    assert.equal(response.status(), 200, path);
+    assets.push({path, status: response.status()});
+  }
   const readme = await page.request.get(
-    "https://raw.githubusercontent.com/nateofspades/pong_game/main/README.md",
+    "https://raw.githubusercontent.com/nateofspades/Rally_Reactor_Game/main/README.md",
   );
   assert.equal(readme.status(), 200);
   const text = await readme.text();
-  assert.equal(text.split("\n")[0], "# Pong");
-  assert.ok(text.includes("[Play live — Vector Duel](" + url + ")"));
+  assert.equal(text.split("\n")[0], "# Rally Reactor");
+  assert.ok(text.includes("[Play live](" + url + ")"));
   assert.ok(
     text.includes("![Active gameplay](assets/screenshots/gameplay.png)"),
   );
@@ -182,8 +192,9 @@ try {
     browser: "chromium",
     viewports: results,
     screenshotPublicStatus: image.status(),
+    assets,
     readme: {
-      firstHeading: "# Pong",
+      firstHeading: "# Rally Reactor",
       liveLink: url,
       embeddedScreenshot: true,
       status: readme.status(),
@@ -193,7 +204,7 @@ try {
     ],
   };
   await writeFile(
-    `${destination}/pong_game-live.json`,
+    `${destination}/rally-reactor-live.json`,
     JSON.stringify(report, null, 2),
   );
   console.log(JSON.stringify(report, null, 2));

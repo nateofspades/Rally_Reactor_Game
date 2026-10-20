@@ -14,7 +14,7 @@ AI reads a new imperfect target only at its reaction interval. Easy / Medium / H
 
 `src/app.js` maps keyboard state and pointer positions to rules inputs, handles focus/visibility, and draws logical coordinates through a DPI-aware transform. Canvas client rectangles—not backing-buffer pixels—map touch positions, preserving accuracy after scaling and orientation. Pointer capture continues drags outside their initial target; cancellation releases the input. The separate 44px horizontal rail maps left/right positions to the paddle's top/bottom travel range, keeping fingers away from the ball. Two-player mode intentionally remains keyboard-only.
 
-Critical playfield geometry keeps a 16:9 aspect ratio. A compact landscape grid puts the setup and pause/restart controls beside the complete court. Portrait layouts stack controls and allow secondary text to scroll. Game visibility loss pauses without auto-resume. Music has a separate lifecycle; game state changes never pause or reconstruct it.
+Critical playfield geometry keeps a 16:9 aspect ratio. A compact landscape grid puts setup and pause/restart controls beside the complete court. Portrait layouts stack controls; compact small-phone layouts omit secondary decorative instructions to keep match/music controls visible. Game visibility loss pauses without auto-resume. Music has a separate lifecycle; game state changes never pause or reconstruct it.
 
 ## Storage and audio
 
