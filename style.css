@@ -621,6 +621,12 @@ input[type="range"] {
     max-width: min(680px, calc((100dvh - 450px) * 16 / 9));
   }
 }
+/* Keep every overlay state inside the height-bounded short-desktop court. */
+@media (min-width: 1000px) and (min-height: 601px) and (max-height: 680px) {
+  .overlay { padding: 8px; }
+  .overlay h2 { font-size: 24px; margin: 4px 0; }
+  .overlay p:not(.eyebrow) { font-size: 12px; margin-bottom: 8px; }
+}
 @media (max-width: 600px) and (max-height: 600px) {
   main { padding: 8px 14px; }
   header { margin-bottom: 8px; }
