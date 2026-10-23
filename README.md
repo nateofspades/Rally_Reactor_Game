@@ -1,6 +1,6 @@
 # Rally Reactor
 
-[Play live](https://nateofspades.github.io/Rally_Reactor_Game/)
+[Play Rally Reactor](https://nateofspades.github.io/Rally_Reactor_Game/)
 
 ![Active gameplay](assets/screenshots/gameplay.png)
 
